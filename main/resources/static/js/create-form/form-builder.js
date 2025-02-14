@@ -1,71 +1,13 @@
 import { renderJSON } from "../render.js";
+import { formStructure } from "./question-structure/form-structure-json.js";
+import { validationConfig } from "./question-structure/validation-data.js";
 
 function createFormsTableContainer() {
   const container = document.createElement('div');
   container.id = "container";
   document.body.appendChild(container);
-   const formStructure = {
-    tag: "div",
-    attributes: { id: "form-builder" },
-    children: [
-      { tag: "h1", text: "Create Your Form" },
-      {
-        tag: "label",
-        attributes: { for: "form-name" },
-        text: "Form Name:"
-      },
-      {
-        tag: "input",
-        attributes: { type: "text", id: "form-name", placeholder: "Enter Form Name", required: true }
-      },
-      { tag: "div", attributes: { id: "form-name-error" } },
-      { tag: "div", attributes: { id: "questions-container" } },
-      {
-        tag: "button",
-        attributes: { id: "add-question" },
-        text: "+",
-        events: { click: () => document.getElementById('add-question') }
-      },
-      {
-        tag: "button",
-        attributes: { id: "create-form" },
-        text: "Create Form",
-        events: { click: () => document.getElementById('create-form') }
-      }
-    ]
-  };
-
+   
   renderJSON(formStructure, container);
-
-  const validationConfig = {
-    text: [
-      { label: "Required", type: "checkbox", className: "required", inline: true },
-      { label: "Min Length", type: "number", className: "min-length" },
-      { label: "Max Length", type: "number", className: "max-length" }
-    ],
-    number: [
-      { label: "Required", type: "checkbox", className: "required", inline: true },
-      { label: "Min Value", type: "number", className: "min-value" },
-      { label: "Max Value", type: "number", className: "max-value" }
-    ],
-    image: [
-      { label: "Required", type: "checkbox", className: "required", inline: true },
-      { label: "Allowed Formats", type: "text", className: "allowed-formats", placeholder: "e.g., jpg, png" },
-      { label: "Max Size (MB)", type: "number", className: "max-size" }
-    ],
-    checkbox: [
-      { label: "Required", type: "checkbox", className: "required", inline: true },
-      { label: "Options", type: "dynamic-list", className: "checkbox-options", placeholder: "Enter option", addRemove: true}
-    ],
-    radio: [
-      { label: "Required", type: "checkbox", className: "required", inline: true },
-      { label: "Options", type: "dynamic-list", className: "radio-options", placeholder: "Enter option", addRemove: true }
-    ],
-    dropdown: [
-      { label: "Required", type: "checkbox", className: "required", inline: true },
-      { label: "Options", type: "dynamic-list", className: "dropdown-options", placeholder: "Enter option", addRemove: true }
-    ]
-  };
 
   function renderValidationOptions(questionDiv) {
     const type = questionDiv.querySelector('.question-type').value;
@@ -85,6 +27,9 @@ function createFormsTableContainer() {
           const optionsContainer = document.createElement("div");
           optionsContainer.style.width = "100%";
           optionsContainer.classList.add(option.className + "-container");
+          optionsContainer.style.display = "flex";
+          optionsContainer.style.flexDirection = "column";
+          optionsContainer.style.alignItems = "flex-start";
 
           const hiddenInput = document.createElement("input");
           hiddenInput.type = "hidden";
@@ -113,7 +58,7 @@ function createFormsTableContainer() {
 
            const removeIcon = document.createElement("img");
            removeBtn.style.padding = "0";
-           removeBtn.style.margin = "0";
+           removeBtn.style.marginTop = "5px";
            removeBtn.style.backgroundColor = "white";
            removeIcon.src = "/images/cross.png";
            removeIcon.title = "Remove Option";
@@ -300,7 +245,7 @@ document.getElementById("add-question").addEventListener("click", () => {
 
     if (errorMessage) {
       errorMessage.style.color = "red";
-      errorMessage.style.display = "block";
+      errorMessage.style.display = "flex";
     }
 
     title = title.trim();

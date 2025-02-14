@@ -201,6 +201,20 @@ button, .actions button {
     box-shadow: 0 2px 4px rgb(255,255,255);
 }
 
+#form-name-error {
+    justify-content: left;
+}
+
+input[type="checkbox" i] {
+    background-color: black;
+    cursor: pointer;
+    box-sizing: border-box;
+    margin: 0;
+    align-items: start;
+    justify-content: left;
+
+}
+
 h1 {
     text-align: center;
     font-size: 1.5rem;
@@ -244,6 +258,9 @@ input, select {
     animation: expandWidth 0.5s ease-in-out;
 }
 
+.validation-options input[type="checkbox"] {
+    width: 5%;
+}
 
 input:focus {
     border-color: #007bff;
@@ -259,6 +276,11 @@ button {
     background-color: #0083d8;
     color: white;
     transition: background-color 0.3s ease;
+}
+
+.question-content span{
+    margin-top: 8px;
+    margin-right: 2px;
 }
 
 #add-question {
@@ -313,6 +335,10 @@ button:hover {
     margin-bottom: 10px;
 }
 
+.question-config label {
+    margin-right: 5px;
+}
+
 .configure-validations {
     width: 100%;
 }
@@ -346,7 +372,7 @@ button:hover {
     height: 24px;
     display: block;
 }
-/*****************************/
+/*************       RESPONSE          ****************/
 .containerBox {
     max-width: 600px;
     margin: auto;
@@ -358,7 +384,16 @@ button:hover {
     background-color: white;
 }
 
-/*******************************/
+#response-details {
+    text-align: left;
+}
+
+/************          USER       *******************/
+
+.containerCards {
+    display: block;
+}
+
 #forms-container {
    display: grid;
    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -369,7 +404,7 @@ button:hover {
    padding: 20px;
 }
 
-.card {
+.form-card {
    background-color: #ffffff;
    border: 1px solid #ccc;
    border-radius: 0px;
@@ -379,25 +414,25 @@ button:hover {
    transition: transform 0.2s ease, box-shadow 0.2s ease;
    cursor: pointer;
 }
-.card:nth-child(even) {
+.form-card:nth-child(even) {
      border-top: 3px solid #1b6b96;
 }
-.card:nth-child(odd) {
+.form-card:nth-child(odd) {
      border-top: 3px solid #a43848;
 }
 
-.card:hover {
+.form-card:hover {
    transform: translateY(-3px);
    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
 }
 
-.card h3 {
+.form-card h3 {
    font-size: 1.1rem;
    color: #333;
    margin: 0;
 }
 
-.card p {
+.form-card p {
    font-size: 0.9rem;
    color: #666;
    margin: 10px 0 0;
@@ -473,6 +508,13 @@ form {
 .form-group select {
     width: auto;
     cursor: pointer;
+}
+
+.option-group select {
+    width: 100%;
+}
+.option-group input[type="checkbox"] {
+    padding-right : 2px;
 }
 
 .submit-btn {

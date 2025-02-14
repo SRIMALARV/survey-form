@@ -1,5 +1,5 @@
-import { validateInput } from "./formValidation.js";
-import { submitResponse } from "./formSubmission.js";
+import { validateInput } from "./form-validation.js";
+import { submitResponse } from "./form-submission.js";
 
 function createDynamicForm(formId) {
     const containerForm = document.createElement("div");

@@ -14,10 +14,10 @@ let isAdmin = history.state?.isAdmin ?? true;
 const routes = {
     "/view-forms": () => import("./view-forms.js"),
     "/create-form": () => import("./create-form/form-builder.js"),
-    "/user": () => import("./user.js"),
+    "/user": () => import("./user/forms.js"),
     "/view-responses": () => import("./view-responses.js"),
     "/responses": () => import("./responses.js"),
-    "/form": () => import("./form/form.js"),
+    "/form": () => import("./user/form-handler/form-creation.js"),
 };
 
 const createElement = (tag, attributes = {}, text = "") => {

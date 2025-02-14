@@ -38,6 +38,7 @@ export function validateInput(question) {
         inputElement = document.createElement("select");
         inputElement.classList.add("option-group");
         inputElement.name = question.questionText;
+        inputElement.style.width = "100%";
         if (validations.required) inputElement.required = true;
 
         if (Array.isArray(validations.options)) {
