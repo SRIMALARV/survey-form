@@ -100,8 +100,6 @@ function renderViewResponses(formId) {
     }
 
     function updateResponseStatus(responseId, newStatus) {
-        console.log(`Updating responseId ${responseId} to ${newStatus}`);
-
         fetch(`http://localhost:8080/api/responses/${responseId}`, {
             method: "PATCH",
             headers: { "Content-Type": "application/json" },

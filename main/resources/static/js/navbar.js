@@ -102,7 +102,6 @@ const navigate = (url) => {
     window.location.hash = url;
 };
 
-// Event listener for navigation and switching user
 document.addEventListener("click", (e) => {
     if (e.target.matches("[data-link]")) {
         e.preventDefault();
@@ -123,7 +122,6 @@ window.addEventListener("DOMContentLoaded", () => {
     router();
 });
 
-// Listen for URL changes
 window.addEventListener("hashchange", router);
 
 renderApp();

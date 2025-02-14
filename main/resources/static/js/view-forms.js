@@ -130,7 +130,7 @@ function createFormsTableContainer() {
                              .then(() => {
                                  fetchForms(currentPage);
                              })
-                             .catch(error => console.error('Error deactivating form:', error));
+                             .catch((error => console.error('Error deactivating form:', error)));
                          }
                      });
                   });

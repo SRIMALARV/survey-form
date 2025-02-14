@@ -41,9 +41,17 @@ export default function viewResponses(responseId) {
                 responseDetails.appendChild(hr);
             });
         })
-        .catch(error => {
-            console.error('Error fetching response details:', error);
+        .catch(() => {
+            Swal.fire({
+                title: 'Failed!',
+                text: 'Error fetching response details!',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            }).then(() => {
+                window.location.href = "/form";
+            });
         });
+
 
     return containerBox;
 }

@@ -371,8 +371,8 @@ document.getElementById("add-question").addEventListener("click", () => {
       const type = questionDiv.querySelector('.question-type').value;
       const validationOptions = questionDiv.querySelector('.validation-options');
       validationOptions.style.width = "100%";
-      validationOptions.style.flex = "1"; // Expands fully inside flex container
-      validationOptions.style.clear = "both"; // Prevents overlap
+      validationOptions.style.flex = "1";
+      validationOptions.style.clear = "both";
 
       const validations = {};
 
@@ -427,8 +427,6 @@ document.getElementById("add-question").addEventListener("click", () => {
         return response.json();
       })
       .then((data) => {
-        console.log('Form saved:', data);
-
         Swal.fire({
           title: 'Success!',
           text: 'Form saved successfully!',
@@ -439,8 +437,7 @@ document.getElementById("add-question").addEventListener("click", () => {
         });
       })
       .catch((error) => {
-        console.error('Error saving form:', error);
-        alert('Failed to save form: ' + error.message);
+        console.log('Failed to save form: ' + error.message);
       });
   });
 

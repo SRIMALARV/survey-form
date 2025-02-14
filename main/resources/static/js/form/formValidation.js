@@ -1,59 +1,19 @@
 export function validateInput(question) {
     let inputElement;
     const validations = question.validations || {};
-    const errorElement = document.createElement("span");
-    errorElement.classList.add("error-message");
-    errorElement.style.color = "red";
-
-    function validate() {
-        let errorMsg = "";
-        if ((question.type === "text" || question.type === "number") && validations.required && !inputElement.value.trim()) {
-            errorMsg = "This field is required.";
-        }
-        if (question.type === "text") {
-            if (validations.minLength && inputElement.value.length < validations.minLength) {
-                errorMsg = `Minimum ${validations.minLength} characters required.`;
-            }
-            if (validations.maxLength && inputElement.value.length > validations.maxLength) {
-                errorMsg = `Maximum ${validations.maxLength} characters allowed.`;
-            }
-        }
-        if (question.type === "number") {
-            const value = parseFloat(inputElement.value);
-            if (validations.minValue && value < validations.minValue) {
-                errorMsg = `Minimum value is ${validations.minValue}.`;
-            }
-            if (validations.maxValue && value > validations.maxValue) {
-                errorMsg = `Maximum value is ${validations.maxValue}.`;
-            }
-        }
-        if ((question.type === "checkbox" || question.type === "radio" || question.type === "dropdown") && validations.required) {
-            const selected = Array.from(inputElement.querySelectorAll("input, select")).some(el => el.checked || el.value);
-            if (!selected) {
-                errorMsg = "Please select at least one option.";
-            }
-        }
-        if (question.type === "image") {
-            const file = inputElement.files[0];
-            if (file) {
-                const allowedExtensions = ["jpg", "jpeg", "png", "gif"];
-                const fileExtension = file.name.split(".").pop().toLowerCase();
-                if (!allowedExtensions.includes(fileExtension)) {
-                    errorMsg = "Only JPG, JPEG, PNG, and GIF files are allowed.";
-                }
-            } else if (validations.required) {
-                errorMsg = "Please upload an image.";
-            }
-        }
-        errorElement.textContent = errorMsg;
-    }
 
     if (question.type === "text" || question.type === "number") {
         inputElement = document.createElement("input");
         inputElement.type = question.type;
         inputElement.name = question.questionText;
         inputElement.placeholder = question.type === "text" ? "Enter your text" : "Enter the number";
-        inputElement.addEventListener("input", validate);
+        if (validations.required) inputElement.required = true;
+        if (validations.minLength) inputElement.minLength = validations.minLength;
+        if (validations.maxLength) inputElement.maxLength = validations.maxLength;
+        if (question.type === "number") {
+            if (validations.minValue) inputElement.min = validations.minValue;
+            if (validations.maxValue) inputElement.max = validations.maxValue;
+        }
     } else if (question.type === "checkbox" || question.type === "radio") {
         inputElement = document.createElement("div");
         inputElement.classList.add("option-group");
@@ -63,19 +23,22 @@ export function validateInput(question) {
                 input.type = question.type;
                 input.name = question.questionText;
                 input.value = option;
-                input.addEventListener("change", validate);
 
                 const optionLabel = document.createElement("label");
                 optionLabel.appendChild(input);
                 optionLabel.appendChild(document.createTextNode(option));
+
                 inputElement.appendChild(optionLabel);
                 inputElement.appendChild(document.createElement("br"));
             });
+        } else {
+            return null;
         }
     } else if (question.type === "dropdown") {
         inputElement = document.createElement("select");
+        inputElement.classList.add("option-group");
         inputElement.name = question.questionText;
-        inputElement.addEventListener("change", validate);
+        if (validations.required) inputElement.required = true;
 
         if (Array.isArray(validations.options)) {
             validations.options.forEach(option => {
@@ -84,17 +47,20 @@ export function validateInput(question) {
                 optionElement.textContent = option;
                 inputElement.appendChild(optionElement);
             });
+        } else {
+            return null;
         }
     } else if (question.type === "image") {
         inputElement = document.createElement("input");
         inputElement.type = "file";
         inputElement.name = question.questionText;
         inputElement.accept = ".jpg, .jpeg, .png, .gif";
-        inputElement.addEventListener("change", validate);
+        if (validations.required) inputElement.required = true;
+    } else {
+        inputElement = document.createElement("input");
+        inputElement.type = "text";
+        inputElement.name = question.questionText;
     }
 
-    const wrapper = document.createElement("div");
-    wrapper.appendChild(inputElement);
-    wrapper.appendChild(errorElement);
-    return wrapper;
+    return inputElement;
 }
