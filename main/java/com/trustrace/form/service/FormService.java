@@ -1,6 +1,5 @@
 package com.trustrace.form.service;
 
-import com.trustrace.form.dao.FormDao;
 import com.trustrace.form.model.Form;
 import com.trustrace.form.repository.FormRepository;
 import com.trustrace.form.repository.ResponseRepository;
