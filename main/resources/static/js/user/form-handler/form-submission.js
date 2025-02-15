@@ -23,7 +23,12 @@ export function submitResponse(event, formId) {
     })
     .then(res => res.json())
     .then(() => {
-        alert("Form submitted successfully!");
+        Swal.fire({
+            title: 'Success!',
+            text: 'Response submitted successfully!',
+            icon: 'success',
+            confirmButtonText: 'OK'
+          });
         navigate(`/user`);
     })
     .catch(error => console.error("Error submitting response:", error));
