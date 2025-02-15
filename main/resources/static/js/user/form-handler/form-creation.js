@@ -43,14 +43,12 @@ function renderForm(form, formId) {
             return;
         }
 
-        // Add event listener for validation on user input
         inputElement.addEventListener("input", toggleSubmitButton);
         div.appendChild(inputElement);
 
         formElement.appendChild(div);
     });
 
-    // 🚀 Submit Button (Initially Disabled)
     const submitButton = document.createElement("button");
     submitButton.textContent = "Submit";
     submitButton.type = "submit";
@@ -58,16 +56,13 @@ function renderForm(form, formId) {
     submitButton.disabled = true; 
     formElement.appendChild(submitButton);
 
-    // Add event listener to check validation
     formElement.addEventListener("input", toggleSubmitButton);
 
-    // Form submission event
     formElement.addEventListener("submit", (event) => submitResponse(event, formId));
 
     return formElement;
 }
 
-// 🚀 Function to Enable/Disable Submit Button Based on Validation
 function toggleSubmitButton() {
     const form = document.getElementById("dynamicForm");
     const submitButton = form.querySelector(".submit-btn");
@@ -91,21 +86,16 @@ function toggleSubmitButton() {
             }
         }
 
-        // 🚀 Check if any error message exists (must be empty for valid input)
         const errorMessage = input.parentElement.querySelector("small");
         if (errorMessage) {
-            console.log(`Checking ${input.name}: Error =`, errorMessage.textContent.trim());
             if (errorMessage.textContent.trim() !== "") {
                 allValid = false;
             }
         }
 
-        // 🚀 Debugging log to see if inputs are valid
-        console.log(`Input: ${input.name}, Value: ${input.value}, Required: ${input.required}, Valid: ${allValid}`);
     });
 
     submitButton.disabled = !allValid;
-    console.log("Final Submit Button State:", submitButton.disabled);
 }
 
 

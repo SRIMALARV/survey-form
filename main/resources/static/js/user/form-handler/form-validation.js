@@ -8,7 +8,7 @@ export function validateInput(question) {
         let isValid = true;
         errorElement.textContent = ""; 
         
-        if (question.type === "text" || question.type === "number") {
+        if (question.type === "text" ) {
             if (validations.required && !inputElement.value.trim()) {
                 errorElement.textContent = "This field is required.";
                 isValid = false;
@@ -50,7 +50,7 @@ export function validateInput(question) {
             }
         }
 
-        toggleSubmitButton(); // Update submit button state
+        toggleSubmitButton(); 
         return isValid;
     }
 
