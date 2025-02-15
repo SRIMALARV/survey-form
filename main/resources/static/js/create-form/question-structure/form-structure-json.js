@@ -3,14 +3,19 @@ export const formStructure = {
   attributes: { id: "form-builder" },
   children: [
     { tag: "h1", text: "Create Your Form" },
-    {
-      tag: "label",
-      attributes: { for: "form-name" },
-      text: "Form Name:"
-    },
-    {
-      tag: "input",
-      attributes: { type: "text", id: "form-name", placeholder: "Enter Form Name", required: true }
+    { tag: "div", 
+      attributes: { id: "form-name-box" },
+      children:  [
+        {
+          tag: "label",
+          attributes: { for: "form-name", id: "form-name-label" },
+          text: "Form Name:"
+        },
+        {
+          tag: "input",
+          attributes: { type: "text", id: "form-name", placeholder: "Enter Form Name", required: true }
+        }
+      ]
     },
     { tag: "div", attributes: { id: "form-name-error" } },
     { tag: "div", attributes: { id: "questions-container" } },

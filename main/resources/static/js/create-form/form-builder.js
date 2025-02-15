@@ -18,89 +18,71 @@ function createFormsTableContainer() {
     if (validationConfig[type]) {
       validationConfig[type].forEach(option => {
         const label = document.createElement('label');
-        label.style.textAlign = "left";
-        label.style.width = "100%";
-        label.textContent = option.label + ": ";
-
-
+        label.classList.add("validation-label");
+        label.textContent = option.label + " : ";
+    
         if (option.type === "dynamic-list" && option.addRemove) {
           const optionsContainer = document.createElement("div");
-          optionsContainer.style.width = "100%";
-          optionsContainer.classList.add(option.className + "-container");
-          optionsContainer.style.display = "flex";
-          optionsContainer.style.flexDirection = "column";
-          optionsContainer.style.alignItems = "flex-start";
-
+          optionsContainer.classList.add(option.className + "-container", "options-container");
+    
           const hiddenInput = document.createElement("input");
           hiddenInput.type = "hidden";
-          hiddenInput.classList.add(option.className);
+          hiddenInput.classList.add(option.className, "hidden-input");
           hiddenInput.setAttribute("placeholder", option.placeholder);
-
+    
           optionsContainer.appendChild(hiddenInput);
           validationOptions.appendChild(label);
           validationOptions.appendChild(optionsContainer);
-
+    
           const addOption = () => {
             const optionWrapper = document.createElement("div");
-            optionWrapper.style.display = "flex";
-            optionWrapper.style.alignItems = "flex-start";
-            optionWrapper.style.width = "100%";
-            optionWrapper.style.gap = "8px";
             optionWrapper.classList.add("option-wrapper");
-
+    
             const optionInput = document.createElement("input");
             optionInput.type = "text";
-            optionInput.style.width = "100%";
+            optionInput.classList.add("option-input");
             optionInput.placeholder = option.placeholder;
             optionInput.addEventListener("input", updateHiddenInput);
-
-           const removeBtn = document.createElement("button");
-
-           const removeIcon = document.createElement("img");
-           removeBtn.style.padding = "0";
-           removeBtn.style.marginTop = "5px";
-           removeBtn.style.backgroundColor = "white";
-           removeIcon.src = "/images/cross.png";
-           removeIcon.title = "Remove Option";
-           removeIcon.style.width = "30px";
-           removeIcon.style.height = "30px";
-
-           removeBtn.appendChild(removeIcon);
-
-           removeBtn.onclick = function () {
-             optionWrapper.remove();
-             updateHiddenInput();
-           };
-
-           optionWrapper.appendChild(optionInput);
-           optionWrapper.appendChild(removeBtn);
-           optionsContainer.insertBefore(optionWrapper, addBtn);
-
+    
+            const removeBtn = document.createElement("button");
+            removeBtn.classList.add("remove-btn");
+    
+            const removeIcon = document.createElement("img");
+            removeIcon.src = "/images/cross.png";
+            removeIcon.title = "Remove Option";
+            removeIcon.classList.add("remove-icon");
+    
+            removeBtn.appendChild(removeIcon);
+            removeBtn.onclick = function () {
+              optionWrapper.remove();
+              updateHiddenInput();
+            };
+    
+            optionWrapper.appendChild(optionInput);
+            optionWrapper.appendChild(removeBtn);
+            optionsContainer.insertBefore(optionWrapper, addBtn);
           };
-
+    
           const updateHiddenInput = () => {
-            const values = Array.from(optionsContainer.querySelectorAll("input[type='text']"))
+            const values = Array.from(optionsContainer.querySelectorAll(".option-input"))
               .map(input => input.value.trim())
               .filter(value => value !== "");
             hiddenInput.value = values.join(",");
           };
-
-         const addBtn = document.createElement("button");
-
-         const addIcon = document.createElement("img");
-         addBtn.style.padding = "0";
-         addBtn.style.margin = "0";
-         addBtn.style.backgroundColor = "white";
-         addIcon.src = "/images/add.png";
-         addIcon.title = "Add Option";
-         addIcon.style.width = "30px";
-         addIcon.style.height = "30px";
-         addBtn.appendChild(addIcon);
-
-         addBtn.onclick = addOption;
-         optionsContainer.appendChild(addBtn);
-
-        } else {
+    
+          const addBtn = document.createElement("button");
+          addBtn.classList.add("add-btn");
+    
+          const addIcon = document.createElement("img");
+          addIcon.src = "/images/add.png";
+          addIcon.title = "Add Option";
+          addIcon.classList.add("add-icon");
+    
+          addBtn.appendChild(addIcon);
+          addBtn.onclick = addOption;
+          optionsContainer.appendChild(addBtn);
+        }
+     else {
           const input = document.createElement('input');
           input.type = option.type;
           input.className = option.className;
@@ -150,7 +132,7 @@ document.getElementById("add-question").addEventListener("click", () => {
           {
             tag: "label",
             children: [
-              { tag: "span", text: "Question Text: " },
+              { tag: "span", text: "Question Text : " },
               { tag: "input", attributes: { type: "text", class: "question-text", required: true, placeholder: "Enter your question here" } }
             ]
           },
