@@ -11,8 +11,8 @@ export const validationConfig = {
   ],
   image: [
     { tag: "input", type: "checkbox", class: "required", label: "Required", inline: true },
-    { tag: "input", type: "text", class: "allowed-formats", label: "Allowed Formats", placeholder: "e.g., jpg, png" },
-    { tag: "input", type: "number", class: "max-size", label: "Max Size (MB)" }
+    { tag: "input", type: "text", class: "allowed-formats", label: "File Formats", placeholder: "Allowed formats - jpg/png/pdf" },
+    { tag: "input", type: "number", class: "max-size", label: "Max Size(MB)", placeholder: "Maximum size of the file" }
   ],
   checkbox: [
     { tag: "input", type: "checkbox", class: "required", label: "Required", inline: true },

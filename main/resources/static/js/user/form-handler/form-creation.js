@@ -26,7 +26,7 @@ function renderForm(form, formId) {
     const title = document.createElement("h2");
     title.textContent = form.name;
     formElement.appendChild(title);
-    formElement.appendChild(document.createElement('hr'));
+    formElement.appendChild(document.createElement("hr"));
 
     form.questions.forEach((question, index) => {
         const div = document.createElement("div");
@@ -43,19 +43,71 @@ function renderForm(form, formId) {
             return;
         }
 
+        // Add event listener for validation on user input
+        inputElement.addEventListener("input", toggleSubmitButton);
         div.appendChild(inputElement);
+
         formElement.appendChild(div);
     });
 
+    // 🚀 Submit Button (Initially Disabled)
     const submitButton = document.createElement("button");
     submitButton.textContent = "Submit";
     submitButton.type = "submit";
-    submitButton.setAttribute("class", "submit-btn");
+    submitButton.classList.add("submit-btn");
+    submitButton.disabled = true; 
     formElement.appendChild(submitButton);
 
+    // Add event listener to check validation
+    formElement.addEventListener("input", toggleSubmitButton);
+
+    // Form submission event
     formElement.addEventListener("submit", (event) => submitResponse(event, formId));
+
     return formElement;
 }
+
+// 🚀 Function to Enable/Disable Submit Button Based on Validation
+function toggleSubmitButton() {
+    const form = document.getElementById("dynamicForm");
+    const submitButton = form.querySelector(".submit-btn");
+
+    if (!submitButton) return;
+
+    const inputs = form.querySelectorAll("input, select, textarea");
+    let allValid = true;
+
+    inputs.forEach(input => {
+        if (input.required) {
+            if ((input.type === "text" || input.type === "number" || input.tagName === "SELECT") && !input.value.trim()) {
+                allValid = false;
+            }
+
+            if ((input.type === "checkbox" || input.type === "radio")) {
+                const group = form.querySelectorAll(`input[name="${input.name}"]:checked`);
+                if (group.length === 0) {
+                    allValid = false;
+                }
+            }
+        }
+
+        // 🚀 Check if any error message exists (must be empty for valid input)
+        const errorMessage = input.parentElement.querySelector("small");
+        if (errorMessage) {
+            console.log(`Checking ${input.name}: Error =`, errorMessage.textContent.trim());
+            if (errorMessage.textContent.trim() !== "") {
+                allValid = false;
+            }
+        }
+
+        // 🚀 Debugging log to see if inputs are valid
+        console.log(`Input: ${input.name}, Value: ${input.value}, Required: ${input.required}, Valid: ${allValid}`);
+    });
+
+    submitButton.disabled = !allValid;
+    console.log("Final Submit Button State:", submitButton.disabled);
+}
+
 
 function renderError(message) {
     const errorElement = document.createElement("h3");
