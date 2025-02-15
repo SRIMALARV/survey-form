@@ -1,3 +1,5 @@
+import { API_BASE_URL } from "../../render";
+
 export function submitResponse(event, formId) {
     event.preventDefault();
 
@@ -16,7 +18,7 @@ export function submitResponse(event, formId) {
         answer: responses[questionId].join(", ")
     }));
 
-    fetch("http://localhost:8080/api/responses", {
+    fetch(`${API_BASE_URL}/responses`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ formId, responses: finalResponses })

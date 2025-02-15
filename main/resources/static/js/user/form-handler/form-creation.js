@@ -1,5 +1,6 @@
 import { validateInput } from "./form-validation.js";
 import { submitResponse } from "./form-submission.js";
+import { API_BASE_URL } from "../../render.js";
 
 function createDynamicForm(formId) {
     const containerForm = document.createElement("div");
@@ -9,10 +10,18 @@ function createDynamicForm(formId) {
         return containerForm;
     }
 
-    fetch(`http://localhost:8080/api/forms/${formId}`)
+    fetch(`${API_BASE_URL}/forms/${formId}`)
         .then(response => response.json())
         .then(form => {
             containerForm.appendChild(renderForm(form, formId));
+            const backButton = document.createElement("button");
+            backButton.textContent = "Back";
+            backButton.classList.add("back-btn");
+            backButton.addEventListener("click", () => {
+                navigate(`/user`);
+            });
+            containerForm.appendChild(backButton);
+
         })
         .catch(error => console.error("Error fetching form details:", error));
 
@@ -53,7 +62,7 @@ function renderForm(form, formId) {
     submitButton.textContent = "Submit";
     submitButton.type = "submit";
     submitButton.classList.add("submit-btn");
-    submitButton.disabled = true; 
+    submitButton.disabled = true;
     formElement.appendChild(submitButton);
 
     formElement.addEventListener("input", toggleSubmitButton);
@@ -97,7 +106,6 @@ function toggleSubmitButton() {
 
     submitButton.disabled = !allValid;
 }
-
 
 function renderError(message) {
     const errorElement = document.createElement("h3");

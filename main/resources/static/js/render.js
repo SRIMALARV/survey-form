@@ -27,3 +27,5 @@ export function renderJSON(json, parent, preserveExisting = false) {
       }
     });
 }
+
+export const API_BASE_URL = "http://localhost:8080/api";

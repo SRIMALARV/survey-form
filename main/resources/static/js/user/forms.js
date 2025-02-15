@@ -1,11 +1,12 @@
 import { renderJSON } from "../render.js";
+import { API_BASE_URL } from "../render.js";
 
 export default function fetchAndRenderForms() {
     const containerCards = document.createElement('div');
     containerCards.id = 'forms-wrapper';
     containerCards.textContent = "Loading forms...";
 
-    fetch('http://localhost:8080/api/forms')
+    fetch(`${API_BASE_URL}/forms`)
         .then(response => response.json())
         .then(forms => {
             if (!Array.isArray(forms)) return;
@@ -18,7 +19,7 @@ export default function fetchAndRenderForms() {
                         tag: 'div',
                         attributes: { class: 'forms-wrapper' },
                         children: [
-                            { tag: 'h1', attributes: { class: 'forms-heading' }, text: 'Available Forms' }, // Keep heading separate
+                            { tag: 'h1', attributes: { class: 'forms-heading' }, text: 'Available Forms' },
                             {
                                 tag: 'div',
                                 attributes: { id: 'forms-container', class: 'forms-container' },
@@ -44,6 +45,7 @@ export default function fetchAndRenderForms() {
 
             containerCards.innerHTML = "";
             renderJSON(jsonStructure, containerCards);
+
         })
         .catch(() => {
             throw new Error('Forms could not be fetched');

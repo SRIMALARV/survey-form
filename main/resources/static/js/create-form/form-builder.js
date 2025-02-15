@@ -1,12 +1,13 @@
 import { renderJSON } from "../render.js";
 import { formStructure } from "./question-structure/form-structure-json.js";
 import { validationConfig } from "./question-structure/validation-data.js";
+import { API_BASE_URL } from "../render.js";
 
 function createFormsTableContainer() {
   const container = document.createElement('div');
   container.id = "container";
   document.body.appendChild(container);
-   
+
   renderJSON(formStructure, container);
 
   function renderValidationOptions(questionDiv) {
@@ -340,7 +341,7 @@ document.getElementById("add-question").addEventListener("click", () => {
       return;
     }
 
-    fetch('http://localhost:8080/api/forms', {
+    fetch(`${API_BASE_URL}/forms`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

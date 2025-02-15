@@ -12,7 +12,7 @@ const appStructure = {
 let isAdmin = history.state?.isAdmin ?? true;
 
 const routes = {
-    "/view-forms": () => import("./view-forms.js"),
+    "/view-forms": () => import("./forms-data/view-forms.js"),
     "/create-form": () => import("./create-form/form-builder.js"),
     "/user": () => import("./user/forms.js"),
     "/view-responses": () => import("./view-responses.js"),

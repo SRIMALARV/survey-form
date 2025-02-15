@@ -113,6 +113,17 @@ button,
     transition: background-color 0.3s;
 }
 
+.container {
+    position: relative;
+    padding: 20px;
+}
+
+.back-btn {
+    position: absolute;
+    left: 10px;
+    top: 130px;
+}
+
 .back-btn {
     margin-left: 5px;
     background-color: black;
@@ -120,6 +131,16 @@ button,
     color: white;
     padding: 5px 10px;
     font-family: 'Poppins', sans-serif;
+}
+
+.summary-container {
+    display: flex;
+    border: 1px solid #ddd;
+    width: 80%;
+    margin: 0 auto;
+    justify-content: space-evenly;
+    align-items: center;
+    background: linear-gradient(to bottom, #e8eff3, #e8f3f9);
 }
 
 
