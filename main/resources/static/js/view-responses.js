@@ -1,4 +1,6 @@
 import { renderJSON, API_BASE_URL } from "./render.js";
+import { navigate } from "./router.js";
+
 
 function renderViewResponses(formId) {
     if (!formId) {
@@ -56,7 +58,7 @@ function renderViewResponses(formId) {
                         { tag: "td", text: response.id },
                         { tag: "td", children: [
                             { tag: "button", text: "View", attributes: { class: "view-btn" },
-                              events: { click: () => navigate(`responses/${response.id}`) } }
+                              events: { click: () => navigate(`/responses/${response.id}`) } }
                         ]},
                         { tag: "td", text: response.status || "Pending" },
                         { tag: "td", children: [
@@ -100,6 +102,7 @@ function renderViewResponses(formId) {
                 if (!response.ok) {
                     throw new Error("Failed to update status");
                 }
+                console.log("errorrrrr");
                 return response.json();
             })
             .then(() => {

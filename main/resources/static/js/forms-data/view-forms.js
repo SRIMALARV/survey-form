@@ -1,6 +1,7 @@
 import { renderJSON } from "../render.js";
 import { formsTableStructure } from "./forms-struct.js";
 import { API_BASE_URL } from "../render.js";
+import { navigate } from "../router.js";
 
 function createFormsTableContainer() {
     const container = document.createElement('div');

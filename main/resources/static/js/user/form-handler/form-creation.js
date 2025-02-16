@@ -1,6 +1,7 @@
 import { validateInput } from "./form-validation.js";
 import { submitResponse } from "./form-submission.js";
 import { API_BASE_URL } from "../../render.js";
+import { navigate } from "../../router.js";
 
 function createDynamicForm(formId) {
     const containerForm = document.createElement("div");

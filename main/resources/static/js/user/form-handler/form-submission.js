@@ -1,4 +1,5 @@
 import { API_BASE_URL } from "../../render.js";
+import { navigate } from "../../router.js";
 
 export function submitResponse(event, formId) {
     event.preventDefault();
