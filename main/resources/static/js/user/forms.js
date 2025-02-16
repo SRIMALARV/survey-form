@@ -6,7 +6,7 @@ export default function fetchAndRenderForms() {
     containerCards.id = 'forms-wrapper';
     containerCards.textContent = "Loading forms...";
 
-    fetch(`${API_BASE_URL}/forms`)
+    fetch(`${API_BASE_URL}/api/forms`)
         .then(response => response.json())
         .then(forms => {
             if (!Array.isArray(forms)) return;

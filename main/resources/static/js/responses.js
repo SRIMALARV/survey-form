@@ -1,12 +1,9 @@
-import { API_BASE_URL } from "./render";
+import { API_BASE_URL } from "./render.js";
 
 export default function viewResponses(responseId) {
     if (!responseId) {
-        console.error('Response ID is missing');
         return document.createElement('div');
     }
-
-    console.log('Fetching response details for responseId:', responseId);
 
     const containerBox = document.createElement('div');
     containerBox.classList.add('containerBox');
@@ -25,7 +22,7 @@ export default function viewResponses(responseId) {
     responseDetails.id = 'response-details';
     containerBox.appendChild(responseDetails);
 
-    fetch(`${API_BASE_URL}/details/${responseId}`)
+    fetch(`${API_BASE_URL}/api/responses/details/${responseId}`)
         .then(response => response.json())
         .then(responseData => {
             responseDetails.innerHTML = '';

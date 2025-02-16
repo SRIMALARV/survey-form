@@ -341,7 +341,7 @@ document.getElementById("add-question").addEventListener("click", () => {
       return;
     }
 
-    fetch(`${API_BASE_URL}/forms`, {
+    fetch(`${API_BASE_URL}/api/forms`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

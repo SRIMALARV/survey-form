@@ -10,7 +10,7 @@ function createDynamicForm(formId) {
         return containerForm;
     }
 
-    fetch(`${API_BASE_URL}/forms/${formId}`)
+    fetch(`${API_BASE_URL}/api/forms/${formId}`)
         .then(response => response.json())
         .then(form => {
             containerForm.appendChild(renderForm(form, formId));
@@ -106,6 +106,7 @@ function toggleSubmitButton() {
 
     submitButton.disabled = !allValid;
 }
+
 
 function renderError(message) {
     const errorElement = document.createElement("h3");

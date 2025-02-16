@@ -1,5 +1,4 @@
-import { renderJSON } from "./render.js";
-import { API_BASE_URL } from "./render.js";
+import { renderJSON, API_BASE_URL } from "./render.js";
 
 function renderViewResponses(formId) {
     if (!formId) {
@@ -39,7 +38,7 @@ function renderViewResponses(formId) {
     const approvedResponses = container.querySelector("#approvedResponses");
     const rejectedResponses = container.querySelector("#rejectedResponses");
 
-    fetch(`${API_BASE_URL}/responses/${formId}`)
+    fetch(`${API_BASE_URL}/api/responses/${formId}`)
         .then(response => response.json())
         .then(responses => {
             let total = responses.length;
@@ -92,7 +91,7 @@ function renderViewResponses(formId) {
     }
 
     function updateResponseStatus(responseId, newStatus) {
-        fetch(`${API_BASE_URL}/responses/${responseId}`, {
+        fetch(`${API_BASE_URL}/api/responses/${responseId}`, {
             method: "PATCH",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ status: newStatus }),
