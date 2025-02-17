@@ -1,10 +1,9 @@
-import { API_BASE_URL, renderJSON } from "./render.js";
+import { API_BASE_URL, renderJSON } from "../render.js";
 
 export default function viewResponses(responseId) {
     if (!responseId) {
         return document.createElement('div');
     }
-
     const containerBox = document.createElement('div');
     containerBox.classList.add('containerBox');
 

@@ -1,6 +1,5 @@
-import { renderJSON, API_BASE_URL } from "./render.js";
-import { navigate } from "./router.js";
-
+import { renderJSON, API_BASE_URL } from "../render.js";
+import { navigate } from "../router.js";
 
 function renderViewResponses(formId) {
     if (!formId) {

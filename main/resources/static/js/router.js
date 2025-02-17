@@ -3,11 +3,11 @@ import RoleManager from "./subscribe-role.js";
 
 const routes = {
     "/login": () => import("./login.js"),
-    "/view-forms": () => import("./forms-data/view-forms.js"),
+    "/view-forms": () => import("./admin-control/view-forms.js"),
     "/create-form": () => import("./create-form/form-builder.js"),
     "/user": () => import("./user/forms.js"),
-    "/view-responses": () => import("./view-responses.js"),
-    "/responses": () => import("./responses.js"),
+    "/view-responses": () => import("./admin-control/view-responses.js"),
+    "/responses": () => import("./admin-control/responses.js"),
     "/form": () => import("./user/form-handler/form-creation.js"),
 };
 
