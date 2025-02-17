@@ -26,7 +26,7 @@ const renderApp = () => {
     logoutBtn.addEventListener("click", () => {
         roleManager.clearRole();
         window.location.hash = "/login";
-        renderApp(); 
+        renderApp();
     });
 
     const handleNavigation = (event) => {
@@ -46,7 +46,7 @@ const renderApp = () => {
         currentNav.forEach(link => {
             const anchor = document.createElement("a");
             anchor.textContent = link.text;
-            anchor.href = link.href;  
+            anchor.href = link.href;
             anchor.setAttribute("data-link", "true");
             navLinks.appendChild(anchor);
         });

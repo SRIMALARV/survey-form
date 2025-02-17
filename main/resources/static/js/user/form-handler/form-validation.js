@@ -5,10 +5,10 @@ export function validateInput(question) {
     const validations = question.validations || {};
     const errorElement = document.createElement("small");
     errorElement.style.color = "red";
-    
+
     function validate() {
         let isValid = true;
-        errorElement.textContent = ""; 
+        errorElement.textContent = "";
 
         if (question.type === "text") {
             if (validations.required && !inputElement.value.trim()) {
@@ -24,7 +24,7 @@ export function validateInput(question) {
                 isValid = false;
             }
         }
-        
+
         if (question.type === "number") {
             const value = parseFloat(inputElement.value);
             if (isNaN(value)) {
@@ -63,7 +63,7 @@ export function validateInput(question) {
             }
         }
 
-        toggleSubmitButton(); 
+        toggleSubmitButton();
         return isValid;
     }
 
@@ -82,8 +82,8 @@ export function validateInput(question) {
             if (validations.maxValue) inputElement.max = validations.maxValue;
         }
 
-        inputElement.addEventListener("input", validate); 
-    } 
+        inputElement.addEventListener("input", validate);
+    }
     else if (question.type === "checkbox" || question.type === "radio") {
         inputElement = document.createElement("div");
         inputElement.classList.add("option-group");
@@ -94,7 +94,7 @@ export function validateInput(question) {
                 input.type = question.type;
                 input.name = question.questionText;
                 input.value = option;
-                input.addEventListener("change", validate); 
+                input.addEventListener("change", validate);
 
                 const optionLabel = document.createElement("label");
                 optionLabel.appendChild(input);
@@ -106,7 +106,7 @@ export function validateInput(question) {
         } else {
             return null;
         }
-    } 
+    }
     else if (question.type === "dropdown") {
         inputElement = document.createElement("select");
         inputElement.classList.add("option-group");
@@ -133,18 +133,18 @@ export function validateInput(question) {
             return null;
         }
 
-        inputElement.addEventListener("change", validate); 
-    } 
+        inputElement.addEventListener("change", validate);
+    }
     else if (question.type === "image") {
         inputElement = document.createElement("input");
         inputElement.type = "file";
         inputElement.name = question.questionText;
         inputElement.accept = ".jpg, .jpeg, .png, .gif";
-        
+
         if (validations.required) inputElement.required = true;
 
-        inputElement.addEventListener("change", validate); 
-    } 
+        inputElement.addEventListener("change", validate);
+    }
     else {
         inputElement = document.createElement("input");
         inputElement.type = "text";
@@ -152,7 +152,7 @@ export function validateInput(question) {
         inputElement.addEventListener("input", validate);
     }
 
-    const wrapper = document.createElement("div"); 
+    const wrapper = document.createElement("div");
     wrapper.appendChild(inputElement);
     wrapper.appendChild(errorElement);
 

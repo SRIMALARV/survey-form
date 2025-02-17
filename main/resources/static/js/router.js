@@ -34,7 +34,7 @@ const router = () => {
                     app.innerHTML = "<h1>404 - Page Not Found</h1>";
                 });
         } else {
-            app.appendChild(routes[path]()); 
+            app.appendChild(routes[path]());
         }
         return;
     }
@@ -46,14 +46,14 @@ const router = () => {
             const id = path.replace(basePath, "").replace("/", "") || null;
             routes[basePath]()
                 .then(module => {
-                    const content = module.default(id); 
+                    const content = module.default(id);
                     app.appendChild(content);
                 })
                 .catch(() => {
                     app.innerHTML = "<h1>404 - Page Not Found</h1>";
                 });
         } else {
-            app.appendChild(routes[basePath]()); 
+            app.appendChild(routes[basePath]());
         }
     } else {
         app.innerHTML = "<h1>404 - Page Not Found</h1>";

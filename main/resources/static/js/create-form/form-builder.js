@@ -7,7 +7,7 @@ function createFormsTableContainer() {
   const container = document.createElement('div');
   container.id = "container";
   document.body.appendChild(container);
-   
+
   renderJSON(formStructure, container);
 
   function renderValidationOptions(questionDiv) {
@@ -52,27 +52,27 @@ function createFormsTableContainer() {
             optionInput.placeholder = option.placeholder;
             optionInput.addEventListener("input", updateHiddenInput);
 
-           const removeBtn = document.createElement("button");
+            const removeBtn = document.createElement("button");
 
-           const removeIcon = document.createElement("img");
-           removeBtn.style.padding = "0";
-           removeBtn.style.margin = "0";
-           removeBtn.style.backgroundColor = "white";
-           removeIcon.src = "/images/cross.png";
-           removeIcon.title = "Remove Option";
-           removeIcon.style.width = "30px";
-           removeIcon.style.height = "30px";
+            const removeIcon = document.createElement("img");
+            removeBtn.style.padding = "0";
+            removeBtn.style.margin = "0";
+            removeBtn.style.backgroundColor = "white";
+            removeIcon.src = "/images/cross.png";
+            removeIcon.title = "Remove Option";
+            removeIcon.style.width = "30px";
+            removeIcon.style.height = "30px";
 
-           removeBtn.appendChild(removeIcon);
+            removeBtn.appendChild(removeIcon);
 
-           removeBtn.onclick = function () {
-             optionWrapper.remove();
-             updateHiddenInput();
-           };
+            removeBtn.onclick = function () {
+              optionWrapper.remove();
+              updateHiddenInput();
+            };
 
-           optionWrapper.appendChild(optionInput);
-           optionWrapper.appendChild(removeBtn);
-           optionsContainer.insertBefore(optionWrapper, addBtn);
+            optionWrapper.appendChild(optionInput);
+            optionWrapper.appendChild(removeBtn);
+            optionsContainer.insertBefore(optionWrapper, addBtn);
 
           };
 
@@ -83,20 +83,20 @@ function createFormsTableContainer() {
             hiddenInput.value = values.join(",");
           };
 
-         const addBtn = document.createElement("button");
+          const addBtn = document.createElement("button");
 
-         const addIcon = document.createElement("img");
-         addBtn.style.padding = "0";
-         addBtn.style.margin = "0";
-         addBtn.style.backgroundColor = "white";
-         addIcon.src = "/images/add.png";
-         addIcon.title = "Add Option";
-         addIcon.style.width = "30px";
-         addIcon.style.height = "30px";
-         addBtn.appendChild(addIcon);
+          const addIcon = document.createElement("img");
+          addBtn.style.padding = "0";
+          addBtn.style.margin = "0";
+          addBtn.style.backgroundColor = "white";
+          addIcon.src = "/images/add.png";
+          addIcon.title = "Add Option";
+          addIcon.style.width = "30px";
+          addIcon.style.height = "30px";
+          addBtn.appendChild(addIcon);
 
-         addBtn.onclick = addOption;
-         optionsContainer.appendChild(addBtn);
+          addBtn.onclick = addOption;
+          optionsContainer.appendChild(addBtn);
 
         } else {
           const input = document.createElement('input');
@@ -117,124 +117,124 @@ function createFormsTableContainer() {
   }
   let questionCount = 0;
 
-let questionJSON = {
-  tag: "div",
-  attributes: { id: "questions-container" },
-  children: []
-};
-
-
-let questionsContainer = document.getElementById("questions-container");
-if (!questionsContainer) {
-  questionsContainer = document.createElement("div");
-  questionsContainer.id = "questions-container";
-  container.appendChild(questionsContainer);
-}
-
-document.getElementById("add-question").addEventListener("click", () => {
-  questionCount++;
-
-  const questionId = `question-${questionCount}`;
-
-  const questionData = {
+  let questionJSON = {
     tag: "div",
-    attributes: { class: "question-config", id: questionId, "data-id": questionId },
-    children: [
-      {
-        tag: "div",
-        attributes: { class: "question-content" },
-        children: [
-          { tag: "h3", text: `Question ${questionCount}` },
-          {
-            tag: "label",
-            children: [
-              { tag: "span", text: "Question Text: " },
-              { tag: "input", attributes: { type: "text", class: "question-text", required: true, placeholder: "Enter your question here" } }
-            ]
-          },
-          {
-            tag: "label",
-            children: [
-              { tag: "span", text: "Question Type: " },
-              {
-                tag: "select",
-                attributes: { class: "question-type" },
-                children: [
-                  { tag: "option", attributes: { value: "text" }, text: "Text" },
-                  { tag: "option", attributes: { value: "number" }, text: "Number" },
-                  { tag: "option", attributes: { value: "checkbox" }, text: "Checkbox" },
-                  { tag: "option", attributes: { value: "dropdown" }, text: "Dropdown" },
-                  { tag: "option", attributes: { value: "radio" }, text: "Radio" },
-                  { tag: "option", attributes: { value: "image" }, text: "Image Upload" }
-                ]
-              }
-            ]
-          },
-          { tag: "div", attributes: { class: "validation-options" } }
-        ]
-      },
-      {
-        tag: "div",
-        attributes: { class: "question-actions" },
-        children: [
-          {
-            tag: "button",
-            attributes: { type: "button", class: "configure-validations", title: "Properties" },
-            children: [
-              {
-                tag: "img",
-                attributes: {
-                  src: "/images/settings.png",
-                  alt: "Configure",
-                  class: "icon-button"
-                }
-              }
-            ],
-            events: {
-              click: (e) => renderValidationOptions(e.currentTarget.closest(".question-config"))
-            }
-          },
-          {
-            tag: "button",
-            attributes: { type: "button", class: "remove-question", title: "Delete Question" },
-            children: [
-              {
-                tag: "img",
-                attributes: {
-                  src: "/images/trash.png",
-                  alt: "Remove",
-                  class: "icon-button"
-                }
-              }
-            ],
-            events: {
-              click: (e) => removeQuestion(e.currentTarget.closest(".question-config").dataset.id)
-            }
-          }
-        ]
-      }
-    ]
+    attributes: { id: "questions-container" },
+    children: []
   };
 
-  questionJSON.children.push(questionData);
-  renderJSON({ children: [questionData] },document.getElementById("questions-container"),true);
-});
+
+  let questionsContainer = document.getElementById("questions-container");
+  if (!questionsContainer) {
+    questionsContainer = document.createElement("div");
+    questionsContainer.id = "questions-container";
+    container.appendChild(questionsContainer);
+  }
+
+  document.getElementById("add-question").addEventListener("click", () => {
+    questionCount++;
+
+    const questionId = `question-${questionCount}`;
+
+    const questionData = {
+      tag: "div",
+      attributes: { class: "question-config", id: questionId, "data-id": questionId },
+      children: [
+        {
+          tag: "div",
+          attributes: { class: "question-content" },
+          children: [
+            { tag: "h3", text: `Question ${questionCount}` },
+            {
+              tag: "label",
+              children: [
+                { tag: "span", text: "Question Text: " },
+                { tag: "input", attributes: { type: "text", class: "question-text", required: true, placeholder: "Enter your question here" } }
+              ]
+            },
+            {
+              tag: "label",
+              children: [
+                { tag: "span", text: "Question Type: " },
+                {
+                  tag: "select",
+                  attributes: { class: "question-type" },
+                  children: [
+                    { tag: "option", attributes: { value: "text" }, text: "Text" },
+                    { tag: "option", attributes: { value: "number" }, text: "Number" },
+                    { tag: "option", attributes: { value: "checkbox" }, text: "Checkbox" },
+                    { tag: "option", attributes: { value: "dropdown" }, text: "Dropdown" },
+                    { tag: "option", attributes: { value: "radio" }, text: "Radio" },
+                    { tag: "option", attributes: { value: "image" }, text: "Image Upload" }
+                  ]
+                }
+              ]
+            },
+            { tag: "div", attributes: { class: "validation-options" } }
+          ]
+        },
+        {
+          tag: "div",
+          attributes: { class: "question-actions" },
+          children: [
+            {
+              tag: "button",
+              attributes: { type: "button", class: "configure-validations", title: "Properties" },
+              children: [
+                {
+                  tag: "img",
+                  attributes: {
+                    src: "/images/settings.png",
+                    alt: "Configure",
+                    class: "icon-button"
+                  }
+                }
+              ],
+              events: {
+                click: (e) => renderValidationOptions(e.currentTarget.closest(".question-config"))
+              }
+            },
+            {
+              tag: "button",
+              attributes: { type: "button", class: "remove-question", title: "Delete Question" },
+              children: [
+                {
+                  tag: "img",
+                  attributes: {
+                    src: "/images/trash.png",
+                    alt: "Remove",
+                    class: "icon-button"
+                  }
+                }
+              ],
+              events: {
+                click: (e) => removeQuestion(e.currentTarget.closest(".question-config").dataset.id)
+              }
+            }
+          ]
+        }
+      ]
+    };
+
+    questionJSON.children.push(questionData);
+    renderJSON({ children: [questionData] }, document.getElementById("questions-container"), true);
+  });
 
   function removeQuestion(questionId) {
     Swal.fire({
-        title: "Confirm Deletion",
-        text: "Are you sure you want to delete this question?",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonText: "Yes",
-        cancelButtonText: "No"
+      title: "Confirm Deletion",
+      text: "Are you sure you want to delete this question?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes",
+      cancelButtonText: "No"
     }).then(result => {
-        if (result.isConfirmed) {
-            document.querySelector(`#container #${questionId}`)?.remove();
-            questionJSON.children = questionJSON.children.filter(q => q.attributes.id !== questionId);
-        }
+      if (result.isConfirmed) {
+        document.querySelector(`#container #${questionId}`)?.remove();
+        questionJSON.children = questionJSON.children.filter(q => q.attributes.id !== questionId);
+      }
     });
-}
+  }
 
   renderJSON(questionJSON, document.getElementById("questions-container"));
 
@@ -266,12 +266,12 @@ document.getElementById("add-question").addEventListener("click", () => {
     validateFormTitle(event.target.value);
   });
   function getUpdatedOptions(validationOptions, type) {
-      const optionsInput = validationOptions.querySelector(`.${type}-options`);
-      if (!optionsInput) return [];
-      return optionsInput.value
-          .split(',')
-          .map(opt => opt.trim())
-          .filter(opt => opt !== '');
+    const optionsInput = validationOptions.querySelector(`.${type}-options`);
+    if (!optionsInput) return [];
+    return optionsInput.value
+      .split(',')
+      .map(opt => opt.trim())
+      .filter(opt => opt !== '');
   }
 
   document.getElementById('create-form').addEventListener('click', () => {
@@ -314,8 +314,8 @@ document.getElementById("add-question").addEventListener("click", () => {
       const type = questionDiv.querySelector('.question-type').value;
       const validationOptions = questionDiv.querySelector('.validation-options');
       validationOptions.style.width = "100%";
-      validationOptions.style.flex = "1"; 
-      validationOptions.style.clear = "both"; 
+      validationOptions.style.flex = "1";
+      validationOptions.style.clear = "both";
 
       const validations = {};
 
@@ -356,7 +356,7 @@ document.getElementById("add-question").addEventListener("click", () => {
       return;
     }
 
-  fetch(`${API_BASE_URL}/api/forms`, {
+    fetch(`${API_BASE_URL}/api/forms`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

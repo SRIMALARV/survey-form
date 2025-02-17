@@ -10,30 +10,30 @@ export default function () {
                 attributes: { class: "login-container" },
                 children: [
                     { tag: "h2", text: "Login" },
-                    { 
-                        tag: "input", 
-                        attributes: { type: "text", id: "username", placeholder: "Username" } 
+                    {
+                        tag: "input",
+                        attributes: { type: "text", id: "username", placeholder: "Username" }
                     },
-                    { 
-                        tag: "input", 
-                        attributes: { type: "password", id: "password", placeholder: "Password" } 
+                    {
+                        tag: "input",
+                        attributes: { type: "password", id: "password", placeholder: "Password" }
                     },
-                    { 
-                        tag: "button", 
-                        attributes: { id: "loginBtn" }, 
-                        text: "Login" 
+                    {
+                        tag: "button",
+                        attributes: { id: "loginBtn" },
+                        text: "Login"
                     },
-                    { 
-                        tag: "p", 
-                        attributes: { id: "error-msg", style: "color: red; display: none;" }, 
-                        text: "Invalid credentials!" 
+                    {
+                        tag: "p",
+                        attributes: { id: "error-msg", style: "color: red; display: none;" },
+                        text: "Invalid credentials!"
                     }
                 ]
             }
         ]
     };
 
-    document.body.innerHTML = ""; 
+    document.body.innerHTML = "";
     renderJSON(loginFormJSON, document.body);
 
     const loginBtn = document.getElementById("loginBtn");
