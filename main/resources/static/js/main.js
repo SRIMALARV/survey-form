@@ -1,4 +1,4 @@
-import RoleManager from "./subscribe-role.js";
+import roleManager from "./subscribe-role.js";
 
 const appStructure = {
     adminNav: [
@@ -24,7 +24,7 @@ const renderApp = () => {
     const logoutBtn = document.createElement("button");
     logoutBtn.textContent = "Logout";
     logoutBtn.addEventListener("click", () => {
-        RoleManager.clearRole();
+        roleManager.clearRole();
         window.location.hash = "/login";
         renderApp(); 
     });
@@ -56,9 +56,9 @@ const renderApp = () => {
         nav.appendChild(logoutBtn);
     };
 
-    updateNavbar(RoleManager.getRole());
+    updateNavbar(roleManager.getRole());
 
-    RoleManager.subscribe(updateNavbar);
+    roleManager.subscribe(updateNavbar);
 
     const mainContainer = document.createElement("div");
     mainContainer.id = appStructure.mainContainer.id;

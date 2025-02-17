@@ -1,4 +1,4 @@
-import RoleManager from "./subscribe-role.js";
+import roleManager from "./subscribe-role.js";
 import users from "./config-data/user-config.js";
 import { renderJSON } from "./render.js";
 
@@ -48,7 +48,7 @@ export default function () {
         const user = users.find(u => u.username === username && u.password === password);
 
         if (user) {
-            RoleManager.setRole(user.role);
+            roleManager.setRole(user.role);
             window.location.hash = user.role === "admin" ? "/view-forms" : "/user";
         } else {
             errorMsg.style.display = "block";

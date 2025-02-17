@@ -1,4 +1,4 @@
-const RoleManager = (() => {
+const roleManager = (() => {
     let role =  localStorage.getItem("userRole") || null;
     let subscribers = [];
 
@@ -23,4 +23,4 @@ const RoleManager = (() => {
     };
 })();
 
-export default RoleManager;
+export default roleManager;

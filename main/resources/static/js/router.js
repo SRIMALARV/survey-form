@@ -1,5 +1,5 @@
 import renderApp from "./main.js";
-import RoleManager from "./subscribe-role.js";
+import roleManager from "./subscribe-role.js";
 
 const routes = {
     "/login": () => import("./login.js"),
@@ -18,7 +18,7 @@ const router = () => {
 
     app.innerHTML = "";
 
-    if (!RoleManager.getRole() && path !== "/login") {
+    if (!roleManager.getRole() && path !== "/login") {
         window.location.hash = "/login";
         return;
     }
@@ -70,7 +70,7 @@ window.addEventListener("hashchange", () => {
 });
 
 window.addEventListener("DOMContentLoaded", () => {
-    if (!RoleManager.getRole()) {
+    if (!roleManager.getRole()) {
         window.location.hash = "/login";
     } else {
         renderApp();
