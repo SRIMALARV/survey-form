@@ -1,4 +1,4 @@
-import RoleManager from "./roleManager.js";
+import RoleManager from "./subscribe-role.js";
 
 const appStructure = {
     adminNav: [

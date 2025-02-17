@@ -1,5 +1,5 @@
 import renderApp from "./main.js";
-import RoleManager from "./roleManager.js";
+import RoleManager from "./subscribe-role.js";
 
 const routes = {
     "/login": () => import("./login.js"),

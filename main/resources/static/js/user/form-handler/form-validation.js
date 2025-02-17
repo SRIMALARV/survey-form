@@ -1,3 +1,5 @@
+import { toggleSubmitButton } from "./form-creation.js";
+
 export function validateInput(question) {
     let inputElement;
     const validations = question.validations || {};
@@ -7,8 +9,8 @@ export function validateInput(question) {
     function validate() {
         let isValid = true;
         errorElement.textContent = ""; 
-        
-        if (question.type === "text" ) {
+
+        if (question.type === "text") {
             if (validations.required && !inputElement.value.trim()) {
                 errorElement.textContent = "This field is required.";
                 isValid = false;
@@ -25,6 +27,10 @@ export function validateInput(question) {
         
         if (question.type === "number") {
             const value = parseFloat(inputElement.value);
+            if (isNaN(value)) {
+                errorElement.textContent = "Please enter a valid number.";
+                isValid = false;
+            }
             if (validations.minValue && value < validations.minValue) {
                 errorElement.textContent = `Minimum value is ${validations.minValue}.`;
                 isValid = false;
@@ -36,7 +42,7 @@ export function validateInput(question) {
         }
 
         if (question.type === "checkbox" || question.type === "radio") {
-            const checkedOptions = [...inputElement.querySelectorAll("input")].filter(input => input.checked);
+            const checkedOptions = document.querySelectorAll(`input[name="${question.questionText}"]:checked`);
             if (validations.required && checkedOptions.length === 0) {
                 errorElement.textContent = "Please select at least one option.";
                 isValid = false;
@@ -46,6 +52,13 @@ export function validateInput(question) {
         if (question.type === "dropdown") {
             if (validations.required && inputElement.value === "") {
                 errorElement.textContent = "Please select an option.";
+                isValid = false;
+            }
+        }
+
+        if (question.type === "image") {
+            if (validations.required && inputElement.files.length === 0) {
+                errorElement.textContent = "Please upload an image.";
                 isValid = false;
             }
         }

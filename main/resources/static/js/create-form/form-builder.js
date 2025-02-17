@@ -7,68 +7,8 @@ function createFormsTableContainer() {
   const container = document.createElement('div');
   container.id = "container";
   document.body.appendChild(container);
-   const formStructure = {
-    tag: "div",
-    attributes: { id: "form-builder" },
-    children: [
-      { tag: "h1", text: "Create Your Form" },
-      {
-        tag: "label",
-        attributes: { for: "form-name" },
-        text: "Form Name:"
-      },
-      {
-        tag: "input",
-        attributes: { type: "text", id: "form-name", placeholder: "Enter Form Name", required: true }
-      },
-      { tag: "div", attributes: { id: "form-name-error" } },
-      { tag: "div", attributes: { id: "questions-container" } },
-      {
-        tag: "button",
-        attributes: { id: "add-question" },
-        text: "+",
-        events: { click: () => document.getElementById('add-question') }
-      },
-      {
-        tag: "button",
-        attributes: { id: "create-form" },
-        text: "Create Form",
-        events: { click: () => document.getElementById('create-form') }
-      }
-    ]
-  };
-
+   
   renderJSON(formStructure, container);
-
-  const validationConfig = {
-    text: [
-      { label: "Required", type: "checkbox", className: "required", inline: true },
-      { label: "Min Length", type: "number", className: "min-length" },
-      { label: "Max Length", type: "number", className: "max-length" }
-    ],
-    number: [
-      { label: "Required", type: "checkbox", className: "required", inline: true },
-      { label: "Min Value", type: "number", className: "min-value" },
-      { label: "Max Value", type: "number", className: "max-value" }
-    ],
-    image: [
-      { label: "Required", type: "checkbox", className: "required", inline: true },
-      { label: "Allowed Formats", type: "text", className: "allowed-formats", placeholder: "e.g., jpg, png" },
-      { label: "Max Size (MB)", type: "number", className: "max-size" }
-    ],
-    checkbox: [
-      { label: "Required", type: "checkbox", className: "required", inline: true },
-      { label: "Options", type: "dynamic-list", className: "checkbox-options", placeholder: "Enter option", addRemove: true}
-    ],
-    radio: [
-      { label: "Required", type: "checkbox", className: "required", inline: true },
-      { label: "Options", type: "dynamic-list", className: "radio-options", placeholder: "Enter option", addRemove: true }
-    ],
-    dropdown: [
-      { label: "Required", type: "checkbox", className: "required", inline: true },
-      { label: "Options", type: "dynamic-list", className: "dropdown-options", placeholder: "Enter option", addRemove: true }
-    ]
-  };
 
   function renderValidationOptions(questionDiv) {
     const type = questionDiv.querySelector('.question-type').value;
@@ -279,36 +219,6 @@ document.getElementById("add-question").addEventListener("click", () => {
   questionJSON.children.push(questionData);
   renderJSON({ children: [questionData] },document.getElementById("questions-container"),true);
 });
-
-function renderJSON(json, parent, preserveExisting = false) {
-    if (!preserveExisting) {
-      parent.innerHTML = "";
-    }
-    json.children.forEach(element => {
-      let existingElement = document.getElementById(element.attributes?.id);
-      let el = existingElement || document.createElement(element.tag);
-
-      if (element.attributes) {
-        Object.entries(element.attributes).forEach(([key, value]) => el.setAttribute(key, value));
-      }
-
-      if (element.text) {
-        el.textContent = element.text;
-      }
-
-      if (element.events && !existingElement) {
-        Object.entries(element.events).forEach(([event, handler]) => el.addEventListener(event, handler));
-      }
-
-      if (element.children) {
-        renderJSON({ children: element.children }, el, preserveExisting);
-      }
-
-      if (!existingElement) {
-        parent.appendChild(el);
-      }
-    });
-  }
 
   function removeQuestion(questionId) {
     Swal.fire({

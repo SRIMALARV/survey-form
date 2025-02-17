@@ -73,7 +73,7 @@ function renderForm(form, formId) {
     return formElement;
 }
 
-function toggleSubmitButton() {
+export function toggleSubmitButton() {
     const form = document.getElementById("dynamicForm");
     const submitButton = form.querySelector(".submit-btn");
 

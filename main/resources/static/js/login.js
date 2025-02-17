@@ -1,41 +1,45 @@
-import RoleManager from "./roleManager.js";
-import users from "./user-config.js";
+import RoleManager from "./subscribe-role.js";
+import users from "./config-data/user-config.js";
+import { renderJSON } from "./render.js";
 
 export default function () {
-    const container = document.createElement("div");
-    container.classList.add("login-container");
+    const loginFormJSON = {
+        children: [
+            {
+                tag: "div",
+                attributes: { class: "login-container" },
+                children: [
+                    { tag: "h2", text: "Login" },
+                    { 
+                        tag: "input", 
+                        attributes: { type: "text", id: "username", placeholder: "Username" } 
+                    },
+                    { 
+                        tag: "input", 
+                        attributes: { type: "password", id: "password", placeholder: "Password" } 
+                    },
+                    { 
+                        tag: "button", 
+                        attributes: { id: "loginBtn" }, 
+                        text: "Login" 
+                    },
+                    { 
+                        tag: "p", 
+                        attributes: { id: "error-msg", style: "color: red; display: none;" }, 
+                        text: "Invalid credentials!" 
+                    }
+                ]
+            }
+        ]
+    };
 
-    const heading = document.createElement("h2");
-    heading.textContent = "Login";
+    document.body.innerHTML = ""; 
+    renderJSON(loginFormJSON, document.body);
 
-    const usernameInput = document.createElement("input");
-    usernameInput.type = "text";
-    usernameInput.id = "username";
-    usernameInput.placeholder = "Username";
-
-    const passwordInput = document.createElement("input");
-    passwordInput.type = "password";
-    passwordInput.id = "password";
-    passwordInput.placeholder = "Password";
-
-    const loginBtn = document.createElement("button");
-    loginBtn.id = "loginBtn";
-    loginBtn.textContent = "Login";
-
-    const errorMsg = document.createElement("p");
-    errorMsg.id = "error-msg";
-    errorMsg.style.color = "red";
-    errorMsg.style.display = "none";
-    errorMsg.textContent = "Invalid credentials!";
-
-    container.appendChild(heading);
-    container.appendChild(usernameInput);
-    container.appendChild(passwordInput);
-    container.appendChild(loginBtn);
-    container.appendChild(errorMsg);
-
-    document.body.innerHTML = ""; // Clear previous content
-    document.body.appendChild(container);
+    const loginBtn = document.getElementById("loginBtn");
+    const usernameInput = document.getElementById("username");
+    const passwordInput = document.getElementById("password");
+    const errorMsg = document.getElementById("error-msg");
 
     loginBtn.addEventListener("click", () => {
         const username = usernameInput.value.trim();

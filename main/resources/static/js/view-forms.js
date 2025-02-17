@@ -1,3 +1,5 @@
+import { API_BASE_URL } from "./render.js";
+
 function createFormsTableContainer() {
   const container = document.createElement('div');
 
@@ -61,7 +63,7 @@ function createFormsTableContainer() {
   const pageSize = 5;
 
   function fetchForms(page) {
-      fetch(`http://localhost:8080/api/forms/paginated?page=${page}&size=${pageSize}`)
+      fetch(`${API_BASE_URL}/api/forms/paginated?page=${page}&size=${pageSize}`)
           .then(response => response.json())
           .then(data => {
               const forms = data.content;
@@ -84,7 +86,7 @@ function createFormsTableContainer() {
                   responsesCell.textContent = 'Loading...';
                   row.appendChild(responsesCell);
 
-                  fetch(`http://localhost:8080/api/responses/count/${form.id}`)
+                  fetch(`${API_BASE_URL}/api/responses/count/${form.id}`)
                       .then(response => response.json())
                       .then(responseCount => {
                           responsesCell.textContent = responseCount;
@@ -121,7 +123,7 @@ function createFormsTableContainer() {
                          confirmButtonText: "Yes, deactivate it!"
                      }).then((result) => {
                          if (result.isConfirmed) {
-                             fetch(`http://localhost:8080/api/forms/${form.id}/status`, {
+                             fetch(`${API_BASE_URL}/api/forms/${form.id}/status`, {
                                  method: 'PUT',
                                  headers: { 'Content-Type': 'application/json' },
                                  body: JSON.stringify({ status: 'inactive' })

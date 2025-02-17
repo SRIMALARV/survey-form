@@ -1,4 +1,4 @@
-import { API_BASE_URL } from "./render.js";
+import { API_BASE_URL, renderJSON } from "./render.js";
 
 export default function viewResponses(responseId) {
     if (!responseId) {
@@ -8,37 +8,34 @@ export default function viewResponses(responseId) {
     const containerBox = document.createElement('div');
     containerBox.classList.add('containerBox');
 
-    const heading = document.createElement('h2');
-    heading.textContent = 'Response Details';
-    containerBox.appendChild(heading);
-
-    const backButton = document.createElement('button');
-    backButton.classList.add('back-btn');
-    backButton.textContent = 'Back';
-    backButton.addEventListener('click', () => window.history.back());
-    containerBox.appendChild(backButton);
-
-    const responseDetails = document.createElement('div');
-    responseDetails.id = 'response-details';
-    containerBox.appendChild(responseDetails);
-
     fetch(`${API_BASE_URL}/api/responses/details/${responseId}`)
         .then(response => response.json())
         .then(responseData => {
-            responseDetails.innerHTML = '';
+            const responseElements = {
+                children: [
+                    { tag: 'h2', text: 'Response Details' },
+                    {
+                        tag: 'button',
+                        text: 'Back',
+                        attributes: { class: 'back-btn' },
+                        events: { click: () => window.history.back() }
+                    },
+                    {
+                        tag: 'div',
+                        attributes: { id: 'response-details' },
+                        children: responseData.responses.map((answer, index) => ({
+                            tag: 'div',
+                            children: [
+                                { tag: 'p', text: `Question ${index + 1}: ${answer.questionId}` },
+                                { tag: 'p', text: `Answer: ${answer.answer}` },
+                                { tag: 'hr' }
+                            ]
+                        }))
+                    }
+                ]
+            };
 
-            responseData.responses.forEach((answer, index) => {
-                const questionElement = document.createElement('p');
-                questionElement.innerHTML = `<strong>Question ${index + 1}:</strong> ${answer.questionId}`;
-                responseDetails.appendChild(questionElement);
-
-                const answerElement = document.createElement('p');
-                answerElement.innerHTML = `<strong>Answer:</strong> ${answer.answer}`;
-                responseDetails.appendChild(answerElement);
-
-                const hr = document.createElement('hr');
-                responseDetails.appendChild(hr);
-            });
+            renderJSON(responseElements, containerBox);
         })
         .catch(() => {
             Swal.fire({
@@ -50,7 +47,6 @@ export default function viewResponses(responseId) {
                 window.location.href = "/form";
             });
         });
-
 
     return containerBox;
 }
