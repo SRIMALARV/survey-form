@@ -370,8 +370,6 @@ document.getElementById("add-question").addEventListener("click", () => {
         return response.json();
       })
       .then((data) => {
-        console.log('Form saved:', data);
-
         Swal.fire({
           title: 'Success!',
           text: 'Form saved successfully!',

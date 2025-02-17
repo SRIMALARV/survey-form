@@ -101,7 +101,6 @@ function renderViewResponses(formId) {
                 if (!response.ok) {
                     throw new Error("Failed to update status");
                 }
-                console.log("errorrrrr");
                 return response.json();
             })
             .then(() => {
