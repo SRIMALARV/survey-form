@@ -88,10 +88,13 @@ export function toggleSubmitButton() {
                 allValid = false;
             }
 
-            if ((input.type === "checkbox" || input.type === "radio")) {
-                const group = form.querySelectorAll(`input[name="${input.name}"]:checked`);
-                if (group.length === 0) {
-                    allValid = false;
+            if (input.type === "checkbox" || input.type === "radio") {
+                if (!groupedNames.has(input.name)) {
+                    groupedNames.add(input.name); // Avoid checking same group multiple times
+                    const groupChecked = form.querySelectorAll(`input[name="${CSS.escape(input.name)}"]:checked`);
+                    if (groupChecked.length === 0) {
+                        allValid = false;
+                    }
                 }
             }
         }

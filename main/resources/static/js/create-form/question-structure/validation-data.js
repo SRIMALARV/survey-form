@@ -1,29 +1,29 @@
 export const validationConfig = {
   text: [
-    { tag: "input", type: "checkbox", class: "required", label: "Required", inline: true },
-    { tag: "input", type: "number", class: "min-length", label: "Min Length", placeholder: "Minimum number of characters" },
-    { tag: "input", type: "number", class: "max-length", label: "Max Length", placeholder: "Maximum number of characters" }
+    { label: "Required", type: "checkbox", className: "required", inline: true },
+    { label: "Min Length", type: "number", className: "min-length", placeholder: "Minimum character length" },
+    { label: "Max Length", type: "number", className: "max-length",  placeholder: "Maximum character length" }
   ],
   number: [
-    { tag: "input", type: "checkbox", class: "required", label: "Required", inline: true },
-    { tag: "input", type: "number", class: "min-value", label: "Min Value", placeholder: "Minimum integer value" },
-    { tag: "input", type: "number", class: "max-value", label: "Max Value", placeholder: "Maximum integer value" }
+    { label: "Required", type: "checkbox", className: "required", inline: true },
+    { label: "Min Value", type: "number", className: "min-value", placeholder: "Minimum integer value" },
+    { label: "Max Value", type: "number", className: "max-value", placeholder: "Maximum integer value" }
   ],
   image: [
-    { tag: "input", type: "checkbox", class: "required", label: "Required", inline: true },
-    { tag: "input", type: "text", class: "allowed-formats", label: "File Formats", placeholder: "Allowed formats - jpg/png/pdf" },
-    { tag: "input", type: "number", class: "max-size", label: "Max Size(MB)", placeholder: "Maximum size of the file" }
+    { label: "Required", type: "checkbox", className: "required", inline: true },
+    { label: "File Formats", type: "text", className: "allowed-formats", placeholder: "e.g., jpg, png" },
+    { label: "Max Size (MB)", type: "number", className: "max-size" }
   ],
   checkbox: [
-    { tag: "input", type: "checkbox", class: "required", label: "Required", inline: true },
-    { tag: "div", class: "checkbox-options", label: "Options", type: "dynamic-list", placeholder: "Enter option", addRemove: true }
+    { label: "Required", type: "checkbox", className: "required", inline: true },
+    { label: "Options", type: "dynamic-list", className: "checkbox-options", placeholder: "Enter option", addRemove: true}
   ],
   radio: [
-    { tag: "input", type: "checkbox", class: "required", label: "Required", inline: true },
-    { tag: "div", class: "radio-options", label: "Options", type: "dynamic-list", placeholder: "Enter option", addRemove: true }
+    { label: "Required", type: "checkbox", className: "required", inline: true },
+    { label: "Options", type: "dynamic-list", className: "radio-options", placeholder: "Enter option", addRemove: true }
   ],
   dropdown: [
-    { tag: "input", type: "checkbox", class: "required", label: "Required", inline: true },
-    { tag: "div", class: "dropdown-options", label: "Options", type: "dynamic-list", placeholder: "Enter option", addRemove: true }
+    { label: "Required", type: "checkbox", className: "required", inline: true },
+    { label: "Options", type: "dynamic-list", className: "dropdown-options", placeholder: "Enter option", addRemove: true }
   ]
 };
