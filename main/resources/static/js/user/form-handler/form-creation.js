@@ -90,7 +90,7 @@ export function toggleSubmitButton() {
 
             if (input.type === "checkbox" || input.type === "radio") {
                 if (!groupedNames.has(input.name)) {
-                    groupedNames.add(input.name); // Avoid checking same group multiple times
+                    groupedNames.add(input.name);
                     const groupChecked = form.querySelectorAll(`input[name="${CSS.escape(input.name)}"]:checked`);
                     if (groupChecked.length === 0) {
                         allValid = false;
@@ -107,10 +107,8 @@ export function toggleSubmitButton() {
         }
 
     });
-
     submitButton.disabled = !allValid;
 }
-
 
 function renderError(message) {
     const errorElement = document.createElement("h3");

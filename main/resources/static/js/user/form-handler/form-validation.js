@@ -42,7 +42,7 @@ export function validateInput(question) {
         }
 
         if (question.type === "checkbox" || question.type === "radio") {
-            const checkedOptions = document.querySelectorAll(`input[name="${question.questionText}"]:checked`);
+            const checkedOptions = inputElement.querySelectorAll(`input[name="${question.questionText}"]:checked`);
             if (validations.required && checkedOptions.length === 0) {
                 errorElement.textContent = "Please select at least one option.";
                 isValid = false;
