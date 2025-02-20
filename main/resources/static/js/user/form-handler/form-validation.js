@@ -56,13 +56,29 @@ export function validateInput(question) {
             }
         }
 
-        if (question.type === "image") {
-            if (validations.required && inputElement.files.length === 0) {
-                errorElement.textContent = "Please upload an image.";
-                isValid = false;
-            }
-        }
+       if (question.type === "file") {
+           const file = inputElement.files[0];
+           if (file) {
+               let maxSize = inputElement.dataset.maxSize ? parseInt(inputElement.dataset.maxSize) : null;
+               let allowedFormats = JSON.parse(inputElement.dataset.allowedFormats);
 
+               if (maxSize && file.size > maxSize * 1024 * 1024) {
+                   errorElement.textContent = `File size must be less than ${maxSize}MB.`;
+                   inputElement.value = "";
+                   isValid = false;
+               }
+
+               const fileExtension = file.name.split('.').pop().toLowerCase();
+               if (allowedFormats.length > 0 && !allowedFormats.includes(fileExtension)) {
+                   errorElement.textContent = `Invalid file type. Allowed: ${allowedFormats.join(", ")}`;
+                   inputElement.value = "";
+                   isValid = false;
+               }
+           } else if (validations.required) {
+               errorElement.textContent = "File is required.";
+               isValid = false;
+           }
+       }
         toggleSubmitButton();
         return isValid;
     }
@@ -135,16 +151,25 @@ export function validateInput(question) {
 
         inputElement.addEventListener("change", validate);
     }
-    else if (question.type === "image") {
+    else if (question.type === "file") {
         inputElement = document.createElement("input");
         inputElement.type = "file";
         inputElement.name = question.questionText;
-        inputElement.accept = ".jpg, .jpeg, .png, .gif";
 
-        if (validations.required) inputElement.required = true;
+        if (question.validations.allowedFormats && question.validations.allowedFormats.length > 0) {
+            inputElement.accept = question.validations.allowedFormats.map(format => `.${format}`).join(",");
+        }
+
+        if (question.validations.required) {
+            inputElement.required = true;
+        }
+
+        inputElement.dataset.maxSize = question.validations.maxSize || "";
+        inputElement.dataset.allowedFormats = JSON.stringify(question.validations.allowedFormats || []);
 
         inputElement.addEventListener("change", validate);
     }
+
     else {
         inputElement = document.createElement("input");
         inputElement.type = "text";

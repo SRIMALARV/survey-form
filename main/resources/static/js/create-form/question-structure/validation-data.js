@@ -9,10 +9,10 @@ export const validationConfig = {
     { label: "Min Value", type: "number", className: "min-value", placeholder: "Minimum integer value" },
     { label: "Max Value", type: "number", className: "max-value", placeholder: "Maximum integer value" }
   ],
-  image: [
+  file: [
     { label: "Required", type: "checkbox", className: "required", inline: true },
-    { label: "File Formats", type: "text", className: "allowed-formats", placeholder: "e.g., jpg, png" },
-    { label: "Max Size (MB)", type: "number", className: "max-size" }
+    { label: "File Formats", type: "text", className: "allowed-formats", placeholder: "e.g., jpg, png, pdf" },
+    { label: "Max Size (MB)", type: "number", className: "max-size", placeholder: "Maximum file size" }
   ],
   checkbox: [
     { label: "Required", type: "checkbox", className: "required", inline: true },

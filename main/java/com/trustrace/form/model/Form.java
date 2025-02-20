@@ -42,6 +42,24 @@ public class Form {
             private Integer minValue;
             private Integer maxValue;
             private List<String> options;
+            private List<String> allowedFormats;
+            private Integer maxSize;
+
+            public Integer getMaxSize() {
+                return maxSize;
+            }
+
+            public void setMaxSize(Integer maxSize) {
+                this.maxSize = maxSize;
+            }
+
+            public List<String> getAllowedFormats() {
+                return allowedFormats;
+            }
+
+            public void setAllowedFormats(List<String> allowedFormats) {
+                this.allowedFormats = allowedFormats;
+            }
 
             public boolean isRequired() {
                 return required;
